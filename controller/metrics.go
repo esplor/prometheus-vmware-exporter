@@ -76,7 +76,7 @@ var (
 	prometheusVmCpuAval = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: namespace,
 		Subsystem: "vm",
-		Name:      "cpu_avaleblemhz",
+		Name:      "cpu_available",
 		Help:      "VMWare VM usage CPU",
 	}, []string{"vm_name", "host_name"})
 	prometheusVmCpuUsage = prometheus.NewGaugeVec(prometheus.GaugeOpts{
@@ -94,7 +94,7 @@ var (
 	prometheusVmMemAval = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: namespace,
 		Subsystem: "vm",
-		Name:      "mem_avaleble",
+		Name:      "mem_available",
 		Help:      "Available memory",
 	}, []string{"vm_name", "host_name"})
 	prometheusVmMemUsage = prometheus.NewGaugeVec(prometheus.GaugeOpts{

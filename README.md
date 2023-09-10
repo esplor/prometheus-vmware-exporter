@@ -3,7 +3,7 @@ Collect metrics ESXi Host
 
 ## Build
 ```sh 
-docker build -t prometheus-vmware-exporter .
+docker build --platform linux/amd64 -t prometheus-vmware-exporter .
 ```
 
 ## Run
