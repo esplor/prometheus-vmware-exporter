@@ -1,0 +1,39 @@
+services:
+  grafana:
+    hostname: grafana
+    container_name: grafana
+    image: grafana/grafana-oss
+    ports:
+      - 3000:3000
+    #environment: # Uncomment to set environment variables
+      # - TZ=Europe/Oslo
+      # - GF_INSTALL_PLUGINS=comma,separated,autoimport,modules
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    restart: unless-stopped
+    user: "1000" # use 'id -u' in terminal to find id for current user
+
+  prometheus-vmware-exporter:
+    hostname: prometheus-vmware-exporter 
+    container_name: prometheus-vmware-exporter
+    image: jnewc/prometheus-vmware-exporter
+    #ports: # Uncomment this and next line to expose port outside docker network for debugging
+    #   - 9512:9512
+    environment:
+      - ESX_HOST=<host>
+      - ESX_USERNAME=<username>
+      - ESX_PASSWORD=<password>
+      - ESX_LOG=debug
+    restart: unless-stopped
+
+  prometheus:
+    container_name: prometheus
+    hostname: prometheus
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    #ports: # Uncomment this and next line to expose prometheus data outside docker network
+    #  - 9090:9090
+    restart: unless-stopped
+    depends_on:
+      - prometheus-vmware-exporter

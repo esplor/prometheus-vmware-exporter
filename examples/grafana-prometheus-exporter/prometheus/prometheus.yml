@@ -1,0 +1,9 @@
+global:
+  scrape_interval:     60s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+
+scrape_configs:
+  - job_name: 'vmware-esxi'
+    static_configs:
+    - targets: ['prometheus-vmware-exporter:9512']
+      labels:
+        alias: vmware-esxi
